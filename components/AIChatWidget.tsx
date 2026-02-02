@@ -11,7 +11,7 @@ const AIChatWidget: React.FC = () => {
     {
       id: 'welcome',
       role: 'model',
-      text: 'Hello. I am the Lumière digital assistant. How can I help you navigate the market today?',
+      text: 'Hello. I am the Urban Nest digital assistant. How can I help you navigate the market today?',
       timestamp: new Date()
     }
   ]);
@@ -124,7 +124,7 @@ const AIChatWidget: React.FC = () => {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-champagne-500 animate-pulse"></div>
                 <div>
-                  <h3 className="font-serif text-white tracking-wide">Lumière Assistant</h3>
+                  <h3 className="font-serif text-white tracking-wide">Urban Nest Assistant</h3>
                 </div>
               </div>
               <button onClick={() => setIsOpen(false)} className="text-stone-400 hover:text-white transition-colors">

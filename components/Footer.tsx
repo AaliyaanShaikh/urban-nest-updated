@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         {/* Massive Brand Name */}
         <div className="border-b border-white/10 pb-20 mb-20">
             <h1 className="font-serif text-[13vw] leading-none text-center text-white/10 font-bold tracking-tighter">
-                LUMIÈRE
+                URBAN NEST
             </h1>
         </div>
 
@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
                New York, NY 10022<br/>
                +1 212 555 0199
              </p>
-             <p className="text-stone-400 font-medium">brokerage@lumiere.com</p>
+             <p className="text-stone-400 font-medium">brokerage@urbannest.com</p>
           </div>
 
           <div>
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-end text-[10px] uppercase tracking-widest text-stone-600 font-bold">
-          <p>&copy; {new Date().getFullYear()} Lumière Real Estate.</p>
+          <p>&copy; {new Date().getFullYear()} Urban Nest Real Estate.</p>
           <p>Equal Housing Opportunity.</p>
         </div>
       </div>

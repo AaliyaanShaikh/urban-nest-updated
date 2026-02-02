@@ -21,24 +21,26 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
   return (
     <nav className="fixed w-full z-50 py-6 px-6 md:px-12 pointer-events-none text-charcoal-900">
       <div className="flex justify-between items-start">
-        {/* Logo */}
+        {/* Logo - black text so it shows on hero */}
         <div className="pointer-events-auto">
-           <div 
-            className="font-serif text-2xl font-bold tracking-wide cursor-pointer mix-blend-difference text-charcoal-900"
+           <div
+            className="font-serif text-2xl font-bold tracking-wide cursor-pointer text-black hover:text-charcoal-800 transition-colors"
             onClick={onNavigateHome}
           >
-            LUMIÈRE
+            URBAN NEST
           </div>
         </div>
 
-        {/* Desktop Menu - Floating Pill */}
-        <motion.div 
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 3, duration: 1 }}
-          className={`hidden md:flex pointer-events-auto items-center gap-8 px-8 py-4 rounded-full border transition-all duration-500 ${
-            isScrolled ? 'bg-white/90 backdrop-blur-md border-stone-200 shadow-sm' : 'bg-white/80 backdrop-blur-sm border-transparent'
-          }`}
+        {/* Desktop Menu - Floating Pill: hidden at top, appears when you scroll past hero */}
+        <motion.div
+          initial={false}
+          animate={{
+            opacity: isScrolled ? 1 : 0,
+            y: isScrolled ? 0 : -8,
+            pointerEvents: isScrolled ? 'auto' : 'none',
+          }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          className="hidden md:flex items-center gap-8 px-8 py-4 rounded-full border bg-white/90 backdrop-blur-md border-stone-200 shadow-sm"
         >
           <a onClick={onNavigateHome} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors cursor-pointer font-medium">Properties</a>
           <a className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors cursor-pointer font-medium">Agents</a>
@@ -46,8 +48,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
           <a className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors cursor-pointer font-medium">Contact</a>
         </motion.div>
 
-        {/* Right Actions */}
-        <div className="hidden md:flex pointer-events-auto items-center gap-6 mix-blend-difference text-charcoal-900">
+        {/* Right Actions - black text so they show on hero */}
+        <div className="hidden md:flex pointer-events-auto items-center gap-6 text-black hover:text-charcoal-800 transition-colors">
            <button className="flex items-center gap-2 text-xs uppercase tracking-widest hover:text-champagne-600 transition-colors font-medium">
               <Globe size={14} /> EN
            </button>
@@ -56,8 +58,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
            </button>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden pointer-events-auto mix-blend-difference text-charcoal-900">
+        {/* Mobile Toggle - black text so it shows on hero */}
+        <div className="md:hidden pointer-events-auto text-black">
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>

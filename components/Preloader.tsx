@@ -16,7 +16,7 @@ const Preloader: React.FC = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="font-serif text-6xl md:text-9xl tracking-tight text-charcoal-900"
         >
-          LUMIÈRE
+          URBAN NEST
         </motion.div>
         <motion.div
           initial={{ opacity: 0, letterSpacing: '0em' }}

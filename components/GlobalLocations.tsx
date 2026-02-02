@@ -19,7 +19,7 @@ const GlobalLocations: React.FC = () => {
             <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-6 block">Our Offices</span>
             <h2 className="font-serif text-5xl text-charcoal-900 mb-8">Local Expertise. <br/> Global Reach.</h2>
             <p className="text-stone-500 font-medium leading-relaxed max-w-md">
-              With headquarters in major financial capitals, Lumière offers unparalleled access to international real estate markets.
+              With headquarters in major financial capitals, Urban Nest offers unparalleled access to international real estate markets.
             </p>
           </div>
 

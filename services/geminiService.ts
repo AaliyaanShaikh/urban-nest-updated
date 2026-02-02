@@ -1,7 +1,14 @@
 import { GoogleGenAI, Chat } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
+// Lazy init so app doesn't crash if API key is missing
+let ai: GoogleGenAI | null = null;
+function getAI(): GoogleGenAI {
+  if (!ai) {
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY ?? import.meta.env.GEMINI_API_KEY ?? '';
+    ai = new GoogleGenAI({ apiKey });
+  }
+  return ai;
+}
 
 // System instruction for the chat assistant
 const SYSTEM_INSTRUCTION = `
@@ -13,7 +20,7 @@ Do not make up specific property data not provided, but speak generally about th
 `;
 
 export const createChatSession = (): Chat => {
-  return ai.chats.create({
+  return getAI().chats.create({
     model: 'gemini-3-flash-preview',
     config: {
       systemInstruction: SYSTEM_INSTRUCTION,
@@ -24,7 +31,7 @@ export const createChatSession = (): Chat => {
 
 export const generatePropertyDescription = async (propertyTitle: string, features: string[]): Promise<string> => {
   try {
-    const response = await ai.models.generateContent({
+    const response = await getAI().models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: `Write a luxurious, captivating, and short (max 2 sentences) marketing description for a property titled "${propertyTitle}" with the following features: ${features.join(', ')}.`,
     });

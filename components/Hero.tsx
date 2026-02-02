@@ -6,9 +6,9 @@ const Hero: React.FC = () => {
     <div className="relative h-screen w-full overflow-hidden bg-alabaster">
       {/* Background Image - Slow Pan */}
       <motion.div 
-        initial={{ scale: 1.1, opacity: 0 }}
+        initial={{ scale: 1.05, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 2.5, delay: 0.5, ease: "easeOut" }}
+        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         className="absolute inset-0 z-0"
       >
         <div 
@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
           <motion.div 
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 3.5, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
             className="flex items-center gap-4"
           >
              <div className="h-[2px] w-12 bg-charcoal-900"></div>
@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
             <motion.span 
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
-              transition={{ duration: 1.2, delay: 3.6, ease: "easeOut" }}
+              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
               className="block"
             >
               Guiding
@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
             <motion.span 
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
-              transition={{ duration: 1.2, delay: 3.8, ease: "easeOut" }}
+              transition={{ duration: 0.5, delay: 0.65, ease: "easeOut" }}
               className="block italic text-stone-500"
             >
               You Home
@@ -62,10 +62,10 @@ const Hero: React.FC = () => {
           <motion.p 
             initial={{ y: '100%', opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 4.2, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
             className="text-charcoal-800 text-sm md:text-lg font-medium leading-relaxed border-l-2 border-champagne-500 pl-6"
           >
-            Lumière is an elite brokerage dedicated to connecting exceptional individuals with the world's most extraordinary properties.
+            Urban Nest is an elite brokerage dedicated to connecting exceptional individuals with the world's most extraordinary properties.
           </motion.p>
         </div>
       </div>
@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 5, duration: 1 }}
+        transition={{ delay: 1.1, duration: 0.5 }}
         className="absolute bottom-12 w-full px-6 md:px-20 flex justify-between items-end text-charcoal-900 text-[10px] uppercase tracking-widest z-20"
       >
         <div className="flex gap-8 font-bold">

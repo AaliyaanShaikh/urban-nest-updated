@@ -9,7 +9,6 @@ import GlobalLocations from './components/GlobalLocations';
 import CallToAction from './components/CallToAction';
 import AIChatWidget from './components/AIChatWidget';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import Philosophy from './components/Philosophy';
 import { Property, ViewState } from './types';
@@ -28,7 +27,7 @@ function App() {
     // Simulate initial load for preloader
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4500); // 4.5s preloader
+    }, 2500); // 2.5s preloader
     return () => clearTimeout(timer);
   }, []);
 
@@ -62,7 +61,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-alabaster text-charcoal-900 font-sans selection:bg-champagne-200 selection:text-black">
-      <CustomCursor />
       <AnimatePresence>
         {loading && <Preloader key="preloader" />}
       </AnimatePresence>
@@ -105,7 +103,6 @@ function App() {
                     <button 
                       onClick={handleNavigateHome}
                       className="flex items-center text-stone-500 hover:text-charcoal-900 transition-colors uppercase tracking-widest text-xs font-bold mb-8 group"
-                      data-cursor-text="Back"
                     >
                       <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-2 transition-transform" /> Back to Collection
                     </button>
@@ -136,7 +133,7 @@ function App() {
                  </div>
 
                  {/* Parallax Hero Image */}
-                 <div className="w-full h-[80vh] overflow-hidden relative mb-20 cursor-none" data-cursor-text="Gallery">
+                 <div className="w-full h-[80vh] overflow-hidden relative mb-20">
                     <motion.img 
                       initial={{ scale: 1.1 }}
                       animate={{ scale: 1 }}
@@ -197,7 +194,7 @@ function App() {
                           <form className="space-y-6">
                              <input className="w-full bg-white border border-stone-200 p-3 focus:border-champagne-500 outline-none transition-colors text-charcoal-900 placeholder-stone-400" placeholder="Name" />
                              <input className="w-full bg-white border border-stone-200 p-3 focus:border-champagne-500 outline-none transition-colors text-charcoal-900 placeholder-stone-400" placeholder="Email" />
-                             <button className="w-full bg-charcoal-900 text-white py-4 mt-4 uppercase tracking-widest text-xs font-bold hover:bg-champagne-600 transition-colors" data-cursor-text="Send">
+                             <button className="w-full bg-charcoal-900 text-white py-4 mt-4 uppercase tracking-widest text-xs font-bold hover:bg-champagne-600 transition-colors">
                                Request Info
                              </button>
                           </form>

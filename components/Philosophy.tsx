@@ -30,7 +30,7 @@ const Philosophy: React.FC = () => {
                   Integrity, <br/> <span className="italic text-stone-500">Insight, & Trust.</span>
                 </h2>
                 <p className="text-xl font-light leading-relaxed text-charcoal-800 mb-12">
-                  At Lumière, we believe that real estate is more than a transaction; it is the stewardship of your legacy. Our brokers are advisors first, providing unbiased counsel based on decades of market data.
+                  At Urban Nest, we believe that real estate is more than a transaction; it is the stewardship of your legacy. Our brokers are advisors first, providing unbiased counsel based on decades of market data.
                 </p>
              </div>
 
