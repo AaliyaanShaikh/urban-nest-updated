@@ -24,7 +24,7 @@ const articles = [
 
 const Journal: React.FC = () => {
   return (
-    <section className="bg-white py-32 border-t border-stone-100">
+    <section id="journal" className="bg-white py-32 border-t border-stone-100">
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-end mb-16">
            <div>

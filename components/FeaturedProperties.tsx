@@ -1,99 +1,137 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Property } from '../types';
-import { FEATURED_PROPERTIES } from '../constants/propertiesConstants';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, MapPin } from 'lucide-react';
 
 interface FeaturedPropertiesProps {
-  onPropertySelect: (property: Property) => void;
+  property: Property;
+  aiDescription: string | null;
+  isLoadingDesc: boolean;
+  onNavigateHome: () => void;
 }
 
-const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({ onPropertySelect }) => {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
-
+const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
+  property,
+  aiDescription,
+  isLoadingDesc,
+  onNavigateHome,
+}) => {
   return (
-    <section ref={targetRef} className="relative h-[400vh] bg-white text-charcoal-900">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        
-        {/* Section Header - below navbar, content starts underneath it */}
-        <div className="absolute top-24 left-6 md:left-24 z-10 pointer-events-none">
-          <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-2 block">Exclusive Listings</span>
-          <h2 className="font-serif text-3xl md:text-4xl text-charcoal-900">Featured Homes</h2>
+    <div className="pt-32 pb-20 bg-white min-h-screen">
+      {/* Detail view header */}
+      <div className="container mx-auto px-6 mb-10">
+        <button
+          onClick={onNavigateHome}
+          className="flex items-center text-stone-500 hover:text-charcoal-900 transition-colors uppercase tracking-widest text-xs font-bold mb-8 group"
+        >
+          <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-2 transition-transform" /> Back to Collection
+        </button>
+
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+          <div>
+            <motion.h1
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="font-serif text-5xl md:text-7xl text-charcoal-900 leading-[0.9] mb-4"
+            >
+              {property.title}
+            </motion.h1>
+            <p className="flex items-center text-stone-500 font-medium text-xl">
+              <MapPin size={18} className="mr-2 text-champagne-600" /> {property.location}
+            </p>
+          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-right"
+          >
+            <div className="text-4xl md:text-5xl font-serif italic text-champagne-600 mb-2">{property.price}</div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Hero Image */}
+      <div className="w-full h-[80vh] overflow-hidden relative mb-20">
+        <motion.img
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5 }}
+          src={property.imageUrl}
+          alt={property.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
+        {/* Left Column: Stats & Description */}
+        <div className="lg:col-span-8">
+          <div className="flex justify-between border-b border-stone-200 pb-8 mb-12">
+            <div className="text-center">
+              <div className="text-3xl font-serif text-charcoal-900">{property.beds}</div>
+              <div className="text-xs uppercase tracking-widest text-stone-500 font-bold">Beds</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-serif text-charcoal-900">{property.baths}</div>
+              <div className="text-xs uppercase tracking-widest text-stone-500 font-bold">Baths</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-serif text-charcoal-900">{property.sqft.toLocaleString()}</div>
+              <div className="text-xs uppercase tracking-widest text-stone-500 font-bold">Sq Ft</div>
+            </div>
+          </div>
+
+          <div className="mb-16">
+            <h3 className="text-xs uppercase tracking-widest text-champagne-600 font-bold mb-6">Listing Description</h3>
+            {isLoadingDesc ? (
+              <div className="space-y-4 animate-pulse">
+                <div className="h-4 bg-stone-200 rounded w-full"></div>
+                <div className="h-4 bg-stone-200 rounded w-5/6"></div>
+                <div className="h-4 bg-stone-200 rounded w-4/6"></div>
+              </div>
+            ) : (
+              <p className="font-serif text-2xl md:text-3xl leading-relaxed text-charcoal-800">
+                "{aiDescription}"
+              </p>
+            )}
+          </div>
+
+          <div className="grid grid-cols-2 gap-8">
+            {property.features.map((feature, i) => (
+              <div key={i} className="flex items-center text-stone-500 font-medium border-t border-stone-200 pt-4">
+                <span className="w-1.5 h-1.5 bg-champagne-600 rounded-full mr-4"></span>
+                {feature}
+              </div>
+            ))}
+          </div>
         </div>
 
-        <motion.div style={{ x }} className="flex gap-20 px-6 md:px-24 items-center pt-32">
-          {/* Intro Card */}
-          <div className="flex-shrink-0 w-[80vw] md:w-[25vw] flex flex-col justify-center">
-            <h3 className="font-serif text-6xl md:text-8xl leading-[0.9] mb-12 text-charcoal-900">
-              Curated <br /> for <span className="italic text-stone-400">Distinction</span>
-            </h3>
-            <p className="text-stone-500 font-medium text-lg mb-12 max-w-sm leading-relaxed">
-              Our portfolio represents the finest properties available on the market. From historic estates to modern masterpieces, we open doors to the exceptional.
-            </p>
-            <div className="flex items-center gap-4 text-xs uppercase tracking-widest text-champagne-600 font-bold">
-               <div className="h-[2px] w-12 bg-champagne-600"></div>
-               <span>Swipe to View</span>
-            </div>
+        {/* Right Column: Sticky Form */}
+        <div className="lg:col-span-4">
+          <div className="sticky top-32 bg-stone-50 p-8 border border-stone-200">
+            <h3 className="font-serif text-2xl mb-2 text-charcoal-900">Inquire</h3>
+            <p className="text-sm text-stone-500 mb-6 font-medium">Interested in this property?</p>
+            <form className="space-y-6">
+              <input
+                className="w-full bg-white border border-stone-200 p-3 focus:border-champagne-500 outline-none transition-colors text-charcoal-900 placeholder-stone-400"
+                placeholder="Name"
+              />
+              <input
+                className="w-full bg-white border border-stone-200 p-3 focus:border-champagne-500 outline-none transition-colors text-charcoal-900 placeholder-stone-400"
+                placeholder="Email"
+              />
+              <button
+                type="button"
+                className="w-full bg-charcoal-900 text-white py-4 mt-4 uppercase tracking-widest text-xs font-bold hover:bg-champagne-600 transition-colors"
+              >
+                Request Info
+              </button>
+            </form>
           </div>
-
-          {/* Property Cards */}
-          {FEATURED_PROPERTIES.map((prop, index) => (
-            <div 
-              key={prop.id} 
-              className="group relative flex-shrink-0 w-[85vw] md:w-[50vw] h-[70vh] cursor-pointer"
-              onClick={() => onPropertySelect(prop)}
-            >
-              <div className="w-full h-full overflow-hidden relative bg-stone-100 shadow-xl">
-                <motion.img
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 1.2, ease: "easeOut" }}
-                  src={prop.imageUrl} 
-                  alt={prop.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                />
-                
-                {/* Index Number */}
-                <div className="absolute top-0 right-0 p-8 text-8xl font-serif text-white/40 font-bold z-10">
-                   0{index + 1}
-                </div>
-              </div>
-              
-              <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 bg-white/90 backdrop-blur-sm transform translate-y-1/2 group-hover:translate-y-0 transition-transform duration-500">
-                <div className="flex justify-between items-end">
-                    <div>
-                      <h4 className="font-serif text-4xl md:text-5xl text-charcoal-900 mb-2">
-                        {prop.title}
-                      </h4>
-                      <p className="text-sm uppercase tracking-widest text-stone-500 mb-4 font-bold">{prop.location}</p>
-                      <div className="flex gap-4 text-charcoal-800 text-xs tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
-                        <span>{prop.beds} Beds</span>
-                        <span className="w-px h-3 bg-stone-300"></span>
-                        <span>{prop.sqft.toLocaleString()} Sq Ft</span>
-                      </div>
-                    </div>
-                    <div className="text-2xl font-serif italic text-champagne-600">
-                      {prop.price}
-                    </div>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {/* End Card */}
-          <div className="flex-shrink-0 w-[80vw] md:w-[30vw] flex flex-col justify-center items-center text-center">
-            <div className="w-32 h-32 rounded-full border border-stone-200 flex items-center justify-center hover:bg-charcoal-900 hover:text-white transition-all duration-500 cursor-pointer group shadow-lg">
-              <ArrowUpRight size={48} className="text-charcoal-900 group-hover:text-white group-hover:rotate-45 transition-all duration-500" />
-            </div>
-            <p className="mt-8 font-serif text-3xl text-charcoal-900">Search MLS</p>
-          </div>
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 

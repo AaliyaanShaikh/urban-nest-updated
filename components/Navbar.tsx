@@ -4,9 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
   onNavigateHome: () => void;
+  onNavigateToSection?: (sectionId: string) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
+const Navbar: React.FC<NavbarProps> = ({ onNavigateHome, onNavigateToSection }) => {
+  const handleNavClick = (sectionId: string) => {
+    onNavigateToSection?.(sectionId);
+    setIsMobileMenuOpen(false);
+  };
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -42,10 +47,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
           transition={{ duration: 0.4, ease: 'easeOut' }}
           className="hidden md:flex items-center gap-8 px-8 py-4 rounded-full border bg-white/90 backdrop-blur-md border-stone-200 shadow-sm"
         >
-          <a onClick={onNavigateHome} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors cursor-pointer font-medium">Properties</a>
-          <a className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors cursor-pointer font-medium">Agents</a>
-          <a className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors cursor-pointer font-medium">Journal</a>
-          <a className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors cursor-pointer font-medium">Contact</a>
+          <button type="button" onClick={() => handleNavClick('properties')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Properties</button>
+          <button type="button" onClick={() => handleNavClick('agents')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Agents</button>
+          <button type="button" onClick={() => handleNavClick('journal')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Journal</button>
+          <button type="button" onClick={() => handleNavClick('contact')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Contact</button>
         </motion.div>
 
         {/* Right Actions - black text so they show on hero */}
@@ -76,10 +81,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
             className="fixed inset-0 bg-white z-40 pointer-events-auto flex items-center justify-center"
           >
             <div className="flex flex-col space-y-8 text-center">
-              <a onClick={() => { onNavigateHome(); setIsMobileMenuOpen(false); }} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Properties</a>
-              <a className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Agents</a>
-              <a className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Journal</a>
-              <a className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Contact</a>
+              <button type="button" onClick={() => handleNavClick('properties')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Properties</button>
+              <button type="button" onClick={() => handleNavClick('agents')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Agents</button>
+              <button type="button" onClick={() => handleNavClick('journal')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Journal</button>
+              <button type="button" onClick={() => handleNavClick('contact')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Contact</button>
             </div>
           </motion.div>
         )}

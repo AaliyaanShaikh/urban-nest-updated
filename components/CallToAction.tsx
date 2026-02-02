@@ -11,7 +11,7 @@ const CallToAction: React.FC = () => {
   const y = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   return (
-    <section ref={ref} className="relative h-[80vh] overflow-hidden flex items-center justify-center">
+    <section id="contact" ref={ref} className="relative h-[80vh] overflow-hidden flex items-center justify-center">
       <motion.div 
         style={{ y, backgroundImage: 'url("https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop")' }}
         className="absolute inset-0 bg-cover bg-center z-0"
