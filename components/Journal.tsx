@@ -6,7 +6,7 @@ const articles = [
     category: 'Market Report',
     title: 'Q3 2024 Market Analysis: Stability in Luxury Sectors',
     date: 'Oct 12, 2024',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2670&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop'
   },
   {
     category: 'Neighborhood Focus',
