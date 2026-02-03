@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Search, Globe } from 'lucide-react';
+import { Menu, X, Globe, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
   onNavigateHome: () => void;
   onNavigateToSection?: (sectionId: string) => void;
+  isContactOpen?: boolean;
+  onOpenContact?: () => void;
+  onCloseContact?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigateHome, onNavigateToSection }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  onNavigateHome,
+  onNavigateToSection,
+  isContactOpen = false,
+  onOpenContact,
+  onCloseContact,
+}) => {
+  const [internalContactOpen, setInternalContactOpen] = useState(false);
+  const isContactVisible = onOpenContact ? isContactOpen : internalContactOpen;
+  const openContact = onOpenContact ?? (() => setInternalContactOpen(true));
+  const closeContact = onCloseContact ?? (() => setInternalContactOpen(false));
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const handleNavClick = (sectionId: string) => {
     onNavigateToSection?.(sectionId);
     setIsMobileMenuOpen(false);
   };
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,18 +63,23 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome, onNavigateToSection }) 
           className="hidden md:flex items-center gap-8 px-8 py-4 rounded-full border bg-white/90 backdrop-blur-md border-stone-200 shadow-sm"
         >
           <button type="button" onClick={() => handleNavClick('properties')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Properties</button>
-          <button type="button" onClick={() => handleNavClick('agents')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Agents</button>
+          <button type="button" onClick={() => handleNavClick('about')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">About</button>
           <button type="button" onClick={() => handleNavClick('journal')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Journal</button>
-          <button type="button" onClick={() => handleNavClick('contact')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Contact</button>
+          <button type="button" onClick={() => openContact()} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Contact</button>
         </motion.div>
 
         {/* Right Actions - black text so they show on hero */}
         <div className="hidden md:flex pointer-events-auto items-center gap-6 text-black hover:text-charcoal-800 transition-colors">
-           <button className="flex items-center gap-2 text-xs uppercase tracking-widest hover:text-champagne-600 transition-colors font-medium">
+           <button type="button" className="flex items-center gap-2 text-xs uppercase tracking-widest hover:text-champagne-600 transition-colors font-medium">
               <Globe size={14} /> EN
            </button>
-           <button className="hover:text-champagne-600 transition-colors">
-              <Search size={18} />
+           <button
+             type="button"
+             onClick={() => openContact()}
+             className="hover:text-champagne-600 transition-colors"
+             aria-label="Open contact form"
+           >
+              <MessageCircle size={18} />
            </button>
         </div>
 
@@ -82,9 +102,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome, onNavigateToSection }) 
           >
             <div className="flex flex-col space-y-8 text-center">
               <button type="button" onClick={() => handleNavClick('properties')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Properties</button>
-              <button type="button" onClick={() => handleNavClick('agents')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Agents</button>
+              <button type="button" onClick={() => handleNavClick('about')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">About</button>
               <button type="button" onClick={() => handleNavClick('journal')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Journal</button>
-              <button type="button" onClick={() => handleNavClick('contact')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Contact</button>
+              <button type="button" onClick={() => { openContact(); setIsMobileMenuOpen(false); }} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Contact</button>
             </div>
           </motion.div>
         )}

@@ -15,25 +15,38 @@ const Footer: React.FC = () => {
       <div ref={ref} className={`max-w-6xl mx-auto ${FOOTER_PADDING} py-16 md:py-20`}>
         {/* Brand + CTA row */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 pb-10 md:pb-12 border-b border-black/10">
-          <div>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.92] overflow-hidden text-black whitespace-nowrap">
-              <motion.span
-                initial={{ y: '100%' }}
-                animate={isInView ? { y: 0 } : { y: '100%' }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block"
-              >
-                URBAN NEST
-              </motion.span>
-            </h2>
-            <motion.p
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+            <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-              className="text-black/55 text-sm leading-relaxed whitespace-nowrap mt-2"
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              Premier real estate. Exceptional properties. Your next chapter starts here.
-            </motion.p>
+              <img
+                src="/LOGO.png"
+                alt="Urban Nest Luxury Real Estate"
+                className="h-20 md:h-24 lg:h-28 w-auto object-contain bg-white"
+              />
+            </motion.div>
+            <div>
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[0.92] text-black whitespace-nowrap">
+                <motion.span
+                  initial={{ y: '100%' }}
+                  animate={isInView ? { y: 0 } : { y: '100%' }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-block"
+                >
+                  URBAN NEST
+                </motion.span>
+              </h2>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                transition={{ duration: 0.4, delay: 0.35 }}
+                className="text-black/55 text-sm leading-relaxed whitespace-nowrap mt-2"
+              >
+                Premier real estate. Exceptional properties. Your next chapter starts here.
+              </motion.p>
+            </div>
           </div>
           <motion.a
             href="mailto:brokerage@urbannest.com"
