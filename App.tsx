@@ -17,6 +17,7 @@ import { Property, ViewState } from './types';
 import { generatePropertyDescription } from './services/geminiService';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropertyGrid from './components/PropertyGrid';
+import CinematicGrid from './components/CinematicGrid';
 
 function App() {
   const [view, setView] = useState<ViewState>(ViewState.HOME);
@@ -104,6 +105,7 @@ function App() {
                 <Philosophy />
                 <PropertyShowcase onPropertySelect={handlePropertySelect} />
                 <AgentsSection />
+                <CinematicGrid />
                 <Journal />
                 <LifestyleSection />
                 <PropertyGrid />
