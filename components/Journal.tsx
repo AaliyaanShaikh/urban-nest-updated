@@ -12,19 +12,19 @@ const articles = [
     category: 'Neighborhood Focus',
     title: 'The Rise of West Chelsea: Art, Architecture, and Living',
     date: 'Sep 28, 2024',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2670&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2670&auto=format&fit=crop'
   },
   {
     category: 'Architecture',
     title: 'Defining Pre-War Charm: What Buyers Look For',
     date: 'Sep 15, 2024',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1512308969429-83bc1c27253b?q=80&w=2670&auto=format&fit=crop'
   }
 ];
 
 const Journal: React.FC = () => {
   return (
-    <section id="journal" className="bg-white py-32 border-t border-stone-100">
+    <section className="bg-white py-32 border-t border-stone-100">
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-end mb-16">
            <div>

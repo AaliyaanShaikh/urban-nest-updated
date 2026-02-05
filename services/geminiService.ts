@@ -1,18 +1,24 @@
 import { GoogleGenAI, Chat } from "@google/genai";
 
-// Lazy init so app doesn't crash if API key is missing
-let ai: GoogleGenAI | null = null;
-function getAI(): GoogleGenAI {
-  if (!ai) {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY ?? import.meta.env.GEMINI_API_KEY ?? '';
-    ai = new GoogleGenAI({ apiKey });
+// Safely access process.env to prevent ReferenceError in browsers
+const getApiKey = () => {
+  try {
+    // Check if process is defined and has env
+    if (typeof process !== 'undefined' && process.env) {
+      return process.env.API_KEY || '';
+    }
+  } catch (e) {
+    // Ignore error if process is not accessible
   }
-  return ai;
-}
+  return '';
+};
+
+const apiKey = getApiKey();
+const ai = new GoogleGenAI({ apiKey });
 
 // System instruction for the chat assistant
 const SYSTEM_INSTRUCTION = `
-You are LuxAI, a premier digital concierge for LuxEstate, a high-end real estate agency. 
+You are Lumière AI, a premier digital concierge for Lumière, a high-end real estate agency. 
 Your tone is sophisticated, polite, knowledgeable, and elegant. 
 You assist clients in finding their dream homes, explaining architectural styles, and discussing market trends in luxury real estate.
 Keep responses concise but beautifully phrased.
@@ -20,7 +26,7 @@ Do not make up specific property data not provided, but speak generally about th
 `;
 
 export const createChatSession = (): Chat => {
-  return getAI().chats.create({
+  return ai.chats.create({
     model: 'gemini-3-flash-preview',
     config: {
       systemInstruction: SYSTEM_INSTRUCTION,
@@ -31,7 +37,7 @@ export const createChatSession = (): Chat => {
 
 export const generatePropertyDescription = async (propertyTitle: string, features: string[]): Promise<string> => {
   try {
-    const response = await getAI().models.generateContent({
+    const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: `Write a luxurious, captivating, and short (max 2 sentences) marketing description for a property titled "${propertyTitle}" with the following features: ${features.join(', ')}.`,
     });
